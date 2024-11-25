@@ -4,90 +4,103 @@
 
 {% block body %}
 <style>
-    .example-wrapper {
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        margin: 20px;
+        height: 100vh;
+        flex-direction: column;
     }
 
-    .user-table {
+    h1 {
+        font-size: 2.5em;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
         width: 80%;
         max-width: 1000px;
-        border-collapse: collapse;
-        margin: 20px 0;
-        font-size: 16px;
-        text-align: left;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
     }
 
-    .user-table th, .user-table td {
-        border: 1px solid #ddd;
+    table th, table td {
+        text-align: center;
         padding: 12px;
+        border-bottom: 1px solid #ddd;
     }
 
-    .user-table th {
+    table th {
         background-color: #007bff;
         color: white;
+        font-size: 1em;
         text-transform: uppercase;
-        text-align: center;
     }
 
-    .user-table td {
-        text-align: center;
-    }
-
-    .user-table tr:nth-child(even) {
+    table tr:nth-child(even) {
         background-color: #f9f9f9;
     }
 
-    .user-table tr:hover {
+    table tr:hover {
         background-color: #f1f1f1;
     }
 
     .btn {
-        display: inline-block;
-        padding: 10px 20px;
+        padding: 12px 20px;
         background-color: #007bff;
         color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 16px;
+        font-size: 1.2em;
         text-align: center;
-        margin-top: 20px;
-        transition: background-color 0.3s ease;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .btn:hover {
         background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn:active {
+        transform: scale(1);
     }
 </style>
 
-<div class="example-wrapper">
-    <h1>Liste des utilisateurs</h1>
+<h1>Liste des utilisateurs</h1>
 
-    <table class="user-table">
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom d'utilisateur</th>
+            <th>Date de création</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for utilisateur in utilisateurs %}
             <tr>
-                <th>ID</th>
-                <th>Nom d'utilisateur</th>
-                <th>Date de création</th>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.username }}</td>
+                <td>{{ utilisateur.createdAt ? utilisateur.createdAt|date('d/m/Y H:i') : 'Non défini' }}</td>
             </tr>
-        </thead>
-        <tbody>
-            {% for utilisateur in utilisateurs %}
-                <tr>
-                    <td>{{ utilisateur.id }}</td>
-                    <td>{{ utilisateur.username }}</td>
-                    <td>{{ utilisateur.createdAt ? utilisateur.createdAt|date('d/m/Y H:i') : 'Non défini' }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3" style="text-align:center;">Aucun utilisateur trouvé</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun utilisateur trouvé</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-    <a href="{{ path('app_home') }}" class="btn">Retour à l'accueil</a>
-</div>
+<a href="{{ path('app_home') }}" class="btn">Retour à l'accueil</a>
 {% endblock %}
