@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CDI Dashboard - Réservation{% endblock %}
+
+{% block body %}
+<style>
+
+</style>
+
+<div class="sidebar">
+    <h2>PCDI Réservation</h2>
+    <a href="#" class="active">Accueil</a>
+    <a href="#">Gestion des utilisateurs</a>
+    <a href="#">Gestion des ordinateurs</a>
+    <a href="#">Réservations</a>
+</div>
+
+<div class="content">
+    <div class="header">
+        <h1>Réservations au CDI</h1>
+        <p>Gérez les réservations et les ordinateurs disponibles.</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Disponibilités</h3>
+            <p>Nombre d'ordinateurs disponibles : <strong>12</strong></p>
+        </div>
+        <div class="card">
+            <h3>Réservations actives</h3>
+            <p>Réservations en cours : <strong>8</strong></p>
+        </div>
+    </div>
+
+    <div class="header">
+        <h2>Liste des Réservations</h2>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Réservation</th>
+                <th>Utilisateur</th>
+                <th>Ordinateur</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Jean Dupont</td>
+                <td>PC-01</td>
+                <td>2024-11-25 14:00</td>
+                <td>
+                    <button>Annuler</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Marie Curie</td>
+                <td>PC-02</td>
+                <td>2024-11-25 15:00</td>
+                <td>
+                    <button>Annuler</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

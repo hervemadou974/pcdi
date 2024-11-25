@@ -1,3 +1,125 @@
-body {
-    background-color: skyblue;
-}
+    /* Global Styling */
+    body {
+        display: flex;
+        margin: 0;
+        height: 100vh;
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+        width: 260px;
+        background-color: #1e293b; /* Dark Blue-Grey */
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #60a5fa; /* Light Blue */
+    }
+
+    .sidebar a {
+        color: #cbd5e1; /* Light Grey-Blue */
+        text-decoration: none;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+        background-color: #334155; /* Hover effect */
+    }
+
+    .sidebar a.active {
+        background-color: #60a5fa;
+        color: #1e293b;
+        font-weight: bold;
+    }
+
+    /* Main Content Styling */
+    .content {
+        flex-grow: 1;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e2e8f0; /* Light Grey */
+    }
+
+    .header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1e293b; /* Dark Blue-Grey */
+    }
+
+    .header p {
+        font-size: 1.1rem;
+        color: #64748b; /* Grey-Blue */
+    }
+
+    /* Cards Styling */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1e293b; /* Dark Blue-Grey */
+    }
+
+    .card p {
+        color: #64748b; /* Grey-Blue */
+        font-size: 1rem;
+    }
+
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
