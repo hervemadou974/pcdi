@@ -1,0 +1,218 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+<style>
+/* Global Styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Card Styling */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    margin: 1rem;
+}
+
+/* Form Heading */
+.card h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Input Fields */
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Labels */
+.form-label {
+    display: block;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* Checkbox */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-check-input {
+    margin-right: 0.5rem;
+    accent-color: #007bff;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Alert Messages */
+.alert {
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.alert-info {
+    background-color: #cff4fc;
+    color: #055160;
+    border: 1px solid #b6effb;
+}
+
+/* Link to Register */
+.register-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    .card h2 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    {% if error %}
+                        <div class="alert alert-danger text-center">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="alert alert-info text-center">
+                            Vous êtes connecté en tant que <strong>{{ app.user.userIdentifier }}</strong>.
+                            <a href="{{ path('app_logout') }}" class="btn btn-link">Se déconnecter</a>
+                        </div>
+                    {% else %}
+                        <h2 class="text-center mb-4">Connexion</h2>
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="inputUsername" class="form-label">Nom d'utilisateur</label>
+                                <input 
+                                    type="text" 
+                                    value="{{ last_username }}" 
+                                    name="username" 
+                                    id="inputUsername" 
+                                    class="form-control form-control-lg" 
+                                    placeholder="Entrez votre nom d'utilisateur" 
+                                    autocomplete="username" 
+                                    required autofocus>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">Mot de passe</label>
+                                <input 
+                                    type="password" 
+                                    name="password" 
+                                    id="inputPassword" 
+                                    class="form-control form-control-lg" 
+                                    placeholder="Entrez votre mot de passe" 
+                                    autocomplete="current-password" 
+                                    required>
+                            </div>
+
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                            <div class="form-check mb-3">
+                                <input 
+                                    type="checkbox" 
+                                    name="_remember_me" 
+                                    id="rememberMe" 
+                                    class="form-check-input">
+                                <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-lg" type="submit">
+                                    Se connecter
+                                </button>
+                            </div>
+                        </form>
+
+                        <a href="{{ path('app_register') }}" class="register-link">
+                            Pas encore de compte ? Créez-en un ici
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

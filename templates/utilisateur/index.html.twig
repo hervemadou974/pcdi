@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .user-table {
+        width: 80%;
+        max-width: 1000px;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .user-table th, .user-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+    }
+
+    .user-table th {
+        background-color: #007bff;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .user-table td {
+        text-align: center;
+    }
+
+    .user-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .user-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="example-wrapper">
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Date de création</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for utilisateur in utilisateurs %}
+                <tr>
+                    <td>{{ utilisateur.id }}</td>
+                    <td>{{ utilisateur.username }}</td>
+                    <td>{{ utilisateur.createdAt ? utilisateur.createdAt|date('d/m/Y H:i') : 'Non défini' }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align:center;">Aucun utilisateur trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_home') }}" class="btn">Retour à l'accueil</a>
+</div>
+{% endblock %}
