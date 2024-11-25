@@ -1,30 +1,108 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ordinateur{% endblock %}
+{% block title %}Détails de l'ordinateur{% endblock %}
 
 {% block body %}
-    <h1>Ordinateur</h1>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ordinateur.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ ordinateur.name }}</td>
-            </tr>
-            <tr>
-                <th>IsAvailable</th>
-                <td>{{ ordinateur.isAvailable ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    h1 {
+        font-size: 2.5em;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
 
-    <a href="{{ path('app_ordinateur_index') }}">back to list</a>
+    .details-table {
+        width: 80%;
+        max-width: 600px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
 
-    <a href="{{ path('app_ordinateur_edit', {'id': ordinateur.id}) }}">edit</a>
+    .details-table th, .details-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
 
-    {{ include('ordinateur/_delete_form.html.twig') }}
+    .details-table th {
+        background-color: #f1f1f1;
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 30%;
+    }
+
+    .details-table td {
+        text-align: center;
+    }
+
+    .actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1em;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<h1>Détails de l'ordinateur</h1>
+
+<table class="details-table">
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <td>{{ ordinateur.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ ordinateur.name }}</td>
+        </tr>
+        <tr>
+            <th>Disponible</th>
+            <td>{{ ordinateur.isAvailable ? 'Oui' : 'Non' }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="actions">
+    <a href="{{ path('app_ordinateur_index') }}" class="btn">Retour à la liste</a>
+    <a href="{{ path('app_ordinateur_edit', {'id': ordinateur.id}) }}" class="btn">Modifier</a>
+    {{ include('ordinateur/_delete_form.html.twig', { 'class': 'btn btn-danger' }) }}
+</div>
 {% endblock %}

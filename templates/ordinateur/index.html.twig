@@ -1,37 +1,138 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ordinateur index{% endblock %}
+{% block title %}Liste des ordinateurs{% endblock %}
 
 {% block body %}
-    <h1>Ordinateur index</h1>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+    }
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>IsAvailable</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    h1 {
+        font-size: 2.5em;
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 80%;
+        max-width: 1000px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    table th, table td {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #007bff;
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1.2em;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn:active {
+        transform: scale(1);
+    }
+
+    .btn-action {
+        font-size: 0.9em;
+        padding: 8px 12px;
+        margin: 0 5px;
+        border-radius: 3px;
+    }
+
+    .btn-action.show {
+        background-color: #28a745;
+    }
+
+    .btn-action.show:hover {
+        background-color: #218838;
+    }
+
+    .btn-action.edit {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .btn-action.edit:hover {
+        background-color: #e0a800;
+    }
+</style>
+
+<h1>Liste des ordinateurs</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Disponible</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for ordinateur in ordinateurs %}
             <tr>
                 <td>{{ ordinateur.id }}</td>
                 <td>{{ ordinateur.name }}</td>
-                <td>{{ ordinateur.isAvailable ? 'Yes' : 'No' }}</td>
+                <td>{{ ordinateur.isAvailable ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('app_ordinateur_show', {'id': ordinateur.id}) }}">show</a>
-                    <a href="{{ path('app_ordinateur_edit', {'id': ordinateur.id}) }}">edit</a>
+                    <a href="{{ path('app_ordinateur_show', {'id': ordinateur.id}) }}" class="btn-action show">Afficher</a>
+                    <a href="{{ path('app_ordinateur_edit', {'id': ordinateur.id}) }}" class="btn-action edit">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4" style="text-align: center;">Aucun ordinateur trouvé</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_ordinateur_new') }}">Create new</a>
+<a href="{{ path('app_ordinateur_new') }}" class="btn">Créer un nouvel ordinateur</a>
+<a href="{{ path('app_home') }}" class="btn">retour</a>
 {% endblock %}

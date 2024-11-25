@@ -6,6 +6,7 @@ use App\Entity\Ordinateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class OrdinateurType extends AbstractType
 {
@@ -13,8 +14,10 @@ class OrdinateurType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('isAvailable')
-        ;
+            ->add('isAvailable', CheckboxType::class, [
+                'label' => 'Disponible',
+                'required' => false, // Les cases à cocher ne sont généralement pas obligatoires
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

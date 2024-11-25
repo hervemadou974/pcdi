@@ -3,12 +3,11 @@
 {% block title %}CDI Dashboard - Réservation{% endblock %}
 
 {% block body %}
-
 <div class="sidebar">
     <h2>PCDI Réservation</h2>
     <a href="#" class="active">Accueil</a>
-    <a href="{{ path('app_utilisateur') }}">Liste des Utilisateur</a>
-    <a href="{{ path('app_ordinateur_index') }}">Gestion Pc</a>
+    <a href="{{ path('app_utilisateur') }}">Liste des Utilisateurs</a>
+    <a href="{{ path('app_ordinateur_index') }}">Gestion PC</a>
     <a href="#">Réservations</a>
     <a href="{{ path('app_logout') }}" class="logout">Se déconnecter</a>
 </div>
@@ -22,11 +21,11 @@
     <div class="cards">
         <div class="card">
             <h3>Disponibilités</h3>
-            <p>Nombre d'ordinateurs disponibles : <strong>12</strong></p>
+            <p>Nombre d'ordinateurs disponibles : <strong>{{ ordinateursDisponibles }}</strong></p>
         </div>
         <div class="card">
-            <h3>Réservations actives</h3>
-            <p>Réservations en cours : <strong>8</strong></p>
+            <h3>Total d'ordinateurs</h3>
+            <p>Nombre total d'ordinateurs : <strong>{{ totalOrdinateurs }}</strong></p>
         </div>
     </div>
 

@@ -40,11 +40,10 @@ class Ordinateur
     {
         return $this->isAvailable;
     }
+public function setIsAvailable(bool $isAvailable): self
+{
+    $this->isAvailable = $isAvailable;
 
-    public function setAvailable(bool $isAvailable): static
-    {
-        $this->isAvailable = $isAvailable;
-
-        return $this;
-    }
+    return $this;
+}
 }
