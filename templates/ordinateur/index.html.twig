@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ordinateur index{% endblock %}
+
+{% block body %}
+    <h1>Ordinateur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>IsAvailable</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ordinateur in ordinateurs %}
+            <tr>
+                <td>{{ ordinateur.id }}</td>
+                <td>{{ ordinateur.name }}</td>
+                <td>{{ ordinateur.isAvailable ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_ordinateur_show', {'id': ordinateur.id}) }}">show</a>
+                    <a href="{{ path('app_ordinateur_edit', {'id': ordinateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ordinateur_new') }}">Create new</a>
+{% endblock %}
