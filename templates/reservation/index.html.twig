@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des ordinateurs{% endblock %}
+{% block title %}Liste des réservations{% endblock %}
 
 {% block body %}
 <style>
@@ -14,20 +14,19 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        min-height: 100vh;
+        height: 100vh;
     }
 
     h1 {
         font-size: 2.5em;
         color: #007bff;
-        text-align: center;
         margin-bottom: 20px;
     }
 
     table {
         border-collapse: collapse;
-        width: 90%;
-        max-width: 1200px;
+        width: 80%;
+        max-width: 1000px;
         background: white;
         border-radius: 8px;
         overflow: hidden;
@@ -61,21 +60,17 @@
         padding: 12px 20px;
         background-color: #007bff;
         color: white;
+        text-decoration: none;
+        border-radius: 5px;
         font-size: 1.2em;
         text-align: center;
-        border-radius: 5px;
-        text-decoration: none;
-        margin-top: 20px;
         transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 20px;
     }
 
     .btn:hover {
         background-color: #0056b3;
         transform: scale(1.05);
-    }
-
-    .btn:active {
-        transform: scale(1);
     }
 
     .btn-action {
@@ -104,40 +99,36 @@
     }
 </style>
 
-<h1>Liste des ordinateurs</h1>
+<h1>Liste des réservations</h1>
 
 <table>
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nom</th>
-            <th>Disponible</th>
+            <th>Date de réservation</th>
+            <th>Ordinateur</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        {% for ordinateur in ordinateurs %}
+        {% for reservation in reservations %}
             <tr>
-                <td>{{ ordinateur.id }}</td>
-                <td>{{ ordinateur.name }}</td>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.reservationDate ? reservation.reservationDate|date('d/m/Y H:i') : '' }}</td>
+                <td>{{ reservation.ordinateur ? reservation.ordinateur.name : 'Non attribué' }}</td>
                 <td>
-                    <span style="color: {{ ordinateur.isAvailable ? 'green' : 'red' }};">
-                        {{ ordinateur.isAvailable ? 'Oui' : 'Non' }}
-                    </span>
-                </td>
-                <td>
-                    <a href="{{ path('app_ordinateur_show', {'id': ordinateur.id}) }}" class="btn-action show">Afficher</a>
-                    <a href="{{ path('app_ordinateur_edit', {'id': ordinateur.id}) }}" class="btn-action edit">Modifier</a>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn-action show">Afficher</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn-action edit">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4" style="text-align: center;">Aucun ordinateur trouvé</td>
+                <td colspan="4" style="text-align: center;">Aucune réservation trouvée</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<a href="{{ path('app_ordinateur_new') }}" class="btn">Créer un nouvel ordinateur</a>
-<a href="{{ path('app_home') }}" class="btn">Retour</a>
+<a href="{{ path('app_reservation_new') }}" class="btn">Créer une nouvelle réservation</a>
+<a href="{{ path('app_home') }}" class="btn">Retour à l'accueil</a>
 {% endblock %}

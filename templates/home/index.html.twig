@@ -8,7 +8,7 @@
     <a href="#" class="active">Accueil</a>
     <a href="{{ path('app_utilisateur') }}">Liste des Utilisateurs</a>
     <a href="{{ path('app_ordinateur_index') }}">Gestion PC</a>
-    <a href="#">Réservations</a>
+    <a href="{{ path('app_reservation_index') }}">Réservations</a>
     <a href="{{ path('app_logout') }}" class="logout">Se déconnecter</a>
 </div>
 
@@ -44,24 +44,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Jean Dupont</td>
-                <td>PC-01</td>
-                <td>2024-11-25 14:00</td>
-                <td>
-                    <button>Annuler</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Marie Curie</td>
-                <td>PC-02</td>
-                <td>2024-11-25 15:00</td>
-                <td>
-                    <button>Annuler</button>
-                </td>
-            </tr>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.id }}</td>
+                    <td>{{ reservation.utilisateur ? reservation.utilisateur.username : 'Non défini' }}</td>
+                    <td>{{ reservation.ordinateur ? reservation.ordinateur.name : 'Non attribué' }}</td>
+                    <td>{{ reservation.reservationDate ? reservation.reservationDate|date('d/m/Y H:i') : 'Non défini' }}</td>
+                    <td>
+                        <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn-action show">Afficher</a>
+                        <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn-action edit">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">Aucune réservation trouvée</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

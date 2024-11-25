@@ -18,10 +18,10 @@ class Reservation
     private ?\DateTimeInterface $reservationDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
-    private ?Utilisateur $ManyToOne = null;
+    private ?Utilisateur $utilisateur = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Ordinateur $Ordinateur = null;
+    private ?Ordinateur $ordinateur = null;
 
     public function getId(): ?int
     {
@@ -40,26 +40,26 @@ class Reservation
         return $this;
     }
 
-    public function getManyToOne(): ?Utilisateur
+    public function getUtilisateur(): ?Utilisateur
     {
-        return $this->ManyToOne;
+        return $this->utilisateur;
     }
 
-    public function setManyToOne(?Utilisateur $ManyToOne): static
+    public function setUtilisateur(?Utilisateur $utilisateur): static
     {
-        $this->ManyToOne = $ManyToOne;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     public function getOrdinateur(): ?Ordinateur
     {
-        return $this->Ordinateur;
+        return $this->ordinateur;
     }
 
-    public function setOrdinateur(?Ordinateur $Ordinateur): static
+    public function setOrdinateur(?Ordinateur $ordinateur): static
     {
-        $this->Ordinateur = $Ordinateur;
+        $this->ordinateur = $ordinateur;
 
         return $this;
     }

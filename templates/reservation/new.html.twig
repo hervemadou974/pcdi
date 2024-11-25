@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une nouvelle réservation{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        width: 80%;
+        max-width: 500px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .form-container form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-container form div {
+        margin-bottom: 15px;
+    }
+
+    .form-container form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-container form input, .form-container form select, .form-container form textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-container form input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-container form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-back {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+</style>
+
+<h1>Créer une nouvelle réservation</h1>
+
+<div class="form-container">
+    {{ include('reservation/_form.html.twig') }}
+</div>
+
+<a href="{{ path('app_reservation_index') }}" class="btn-back">Retour à la liste</a>
+{% endblock %}
